@@ -23,9 +23,13 @@ echo "Updating package list and installing prerequisites..."
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 
-# Add Docker's official GPG key
+# Add Docker's official GPG key (overwrite without prompting)
 echo "Adding Docker's official GPG key..."
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+if [ -f /usr/share/keyrings/docker-archive-keyring.gpg ]; then
+    echo "Docker GPG keyring exists. Overwriting..."
+fi
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor > /usr/share/keyrings/docker-archive-keyring.gpg
+
 
 # Add Docker's repository
 echo "Adding Docker's repository..."
