@@ -61,8 +61,8 @@ sudo docker pull uzyexe/tetris
 echo "Running the super mega cool Tetris image..."
 sudo docker run -d -p 8080:80 uzyexe/tetris
 
-# Get the public IP of the machine
-IP=$(curl -s ifconfig.me)
+# Get the correct IP address of the machine
+IP=$(hostname -I | awk '{print $1}')
 
 # Display instructions to play Tetris
 echo "Tetris is now running! Open your browser and visit:"
